@@ -1,6 +1,9 @@
 import axios from "axios"
 
-const BASE_URL = "http://localhost:5000/api/auth"
+// const BASE_URL = "http://localhost:5000/api/auth"
+const BASE_URL = import.meta.env.PROD 
+  ? `${import.meta.env.VITE_API_PROD_URL}/auth`
+  : `${import.meta.env.VITE_API_BASE_URL}/auth`;
 
 export const login = async (email: string, password: string) => {
   try {

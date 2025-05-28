@@ -1,7 +1,10 @@
 import axios from "axios";
 import { UserData } from "../types/user";
 
-const BASE_URL = "http://localhost:5000/api/users";
+// const BASE_URL = "http://localhost:5000/api/users";
+const BASE_URL = import.meta.env.PROD 
+  ? `${import.meta.env.VITE_API_PROD_URL}/users`
+  : `${import.meta.env.VITE_API_BASE_URL}/users`;
 
 export const getUsers = async (token: string) => {
   const config = {

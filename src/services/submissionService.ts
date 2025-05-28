@@ -1,8 +1,12 @@
 import axios from "axios"
 import type { SubmissionFormData } from "../types/submission"
 
-const BASE_URL = "http://localhost:5000/api/submissions"
-const FILE_URL = "http://localhost:5000/api/files"
+// const BASE_URL = "http://localhost:5000/api/submissions"
+// const FILE_URL = "http://localhost:5000/api/files"
+
+const BASE_URL = import.meta.env.PROD 
+  ? import.meta.env.VITE_API_PROD_URL
+  : import.meta.env.VITE_API_BASE_URL;
 
 // Upload a file
 export const uploadFile = async (file: File, token: string) => {
@@ -17,7 +21,8 @@ export const uploadFile = async (file: File, token: string) => {
   }
 
   try {
-    const response = await axios.post(`${FILE_URL}/upload`, formData, config)
+    // const response = await axios.post(`${FILE_URL}/upload`, formData, config)
+    const response = await axios.post(`${BASE_URL}/files/upload`, formData, config)
     return response.data.fileUrl
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -37,7 +42,8 @@ export const createSubmission = async (submissionData: SubmissionFormData, token
   }
 
   try {
-    const response = await axios.post(BASE_URL, submissionData, config)
+    // const response = await axios.post(BASE_URL, submissionData, config)
+    const response = await axios.post(`${BASE_URL}/submissions`, submissionData, config)
     return response.data
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -56,7 +62,8 @@ export const getEmployeeSubmissions = async (token: string) => {
   }
 
   try {
-    const response = await axios.get(`${BASE_URL}/employee`, config)
+    // const response = await axios.get(`${BASE_URL}/employee`, config)
+    const response = await axios.get(`${BASE_URL}/submissions/employee`, config)
     return response.data
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -79,7 +86,8 @@ export const getAllSubmissions = async (
   }
 
   try {
-    const response = await axios.get(BASE_URL, config)
+    // const response = await axios.get(BASE_URL, config)
+    const response = await axios.get(`${BASE_URL}/submissions`,  config)
     return response.data
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -104,7 +112,8 @@ export const updateSubmissionStatus = async (
   }
 
   try {
-    const response = await axios.put(`${BASE_URL}/${submissionId}`, { status, adminNotes }, config)
+    // const response = await axios.put(`${BASE_URL}/${submissionId}`, { status, adminNotes }, config)
+    const response = await axios.put(`${BASE_URL}/submissions/${submissionId}`, { status, adminNotes }, config)
     return response.data
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -123,7 +132,8 @@ export const getSubmissionById = async (submissionId: string, token: string) => 
   }
 
   try {
-    const response = await axios.get(`${BASE_URL}/${submissionId}`, config)
+    // const response = await axios.get(`${BASE_URL}/${submissionId}`, config)
+    const response = await axios.get(`${BASE_URL}/submissions/${submissionId}`, config)
     return response.data
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -152,7 +162,8 @@ export const getSubmissionStats = async (
   if (period) params.append("period", period);
 
   try {
-    const response = await axios.get(`${BASE_URL}/stats?${params.toString()}`, config);
+    // const response = await axios.get(`${BASE_URL}/stats?${params.toString()}`, config);
+    const response = await axios.get(`${BASE_URL}/submissions/stats?${params.toString()}`, config);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -177,7 +188,8 @@ export const getSubmissionTrend = async (token: string, month?: number, year?: n
   if (period) params.append("period", period);
 
   try {
-    const response = await axios.get(`${BASE_URL}/trend?${params.toString()}`, config);
+    // const response = await axios.get(`${BASE_URL}/trend?${params.toString()}`, config);
+    const response = await axios.get(`${BASE_URL}/submissions/trend?${params.toString()}`, config);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {

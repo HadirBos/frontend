@@ -1,6 +1,9 @@
 import axios from "axios"
 
-const FILE_URL = "http://localhost:5000/api/files"
+// const FILE_URL = "http://localhost:5000/api/files"
+const BASE_URL = import.meta.env.PROD 
+  ? import.meta.env.VITE_API_PROD_URL
+  : import.meta.env.VITE_API_BASE_URL;
 
 // Upload a file
 export const uploadFile = async (file: File, token: string) => {
@@ -15,7 +18,7 @@ export const uploadFile = async (file: File, token: string) => {
   }
 
   try {
-    const response = await axios.post(`${FILE_URL}/upload`, formData, config)
+    const response = await axios.post(`${BASE_URL}/upload`, formData, config)
     return response.data.fileUrl
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -35,5 +38,5 @@ export const getFileUrl = (fileUrl: string | undefined): string => {
   }
 
   // Otherwise, prepend the base URL
-  return `http://localhost:5000${fileUrl}`
+  return `${BASE_URL}${fileUrl}`
 }
