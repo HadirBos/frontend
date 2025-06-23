@@ -18,7 +18,7 @@ export const uploadFile = async (file: File, token: string) => {
   }
 
   try {
-    const response = await axios.post(`${BASE_URL}/upload`, formData, config)
+    const response = await axios.post(`${BASE_URL}/files/upload`, formData, config)
     return response.data.fileUrl
   } catch (error) {
     if (axios.isAxiosError(error)) {

@@ -17,6 +17,7 @@ import {
 } from "lucide-react"
 import { getCurrentUser } from "../../../services/authService"
 import { getSubmissionById, updateSubmissionStatus } from "../../../services/submissionService"
+import { getFileUrl } from "../../../services/fileUploadService"
 import type { Submission } from "../../../types/submission"
 import Loading from "../../../components/Loading"
 import Avatar from "../../../components/Avatar"
@@ -67,7 +68,8 @@ const SubmissionDetailPage = () => {
 
   const downloadFile = async (fileUrl: string) => {
     try {
-      const response = await axios.get(`http://localhost:5000${fileUrl}`, {
+      const fullUrl = getFileUrl(fileUrl)
+      const response = await axios.get(fullUrl, {
         headers: {
           Authorization: `Bearer ${userInfo.token}`,
         },
