@@ -1,12 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 
-import {
-  Download,
-  DollarSign,
-  FileSpreadsheet,
-  Edit,
-  X,
-} from "lucide-react";
+import { Download, DollarSign, FileSpreadsheet, Edit, X } from "lucide-react";
 import { Payroll } from "../../../types/payroll";
 import { getPayroll } from "../../../services/payrollService";
 import { getCurrentUser } from "../../../services/authService";
@@ -212,7 +206,7 @@ const PayrollPage = () => {
       {/* Summary section */}
       <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-4 md:p-6">
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-6">
-          <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-2 md:mb-0">
+          <h3 className="text-md md:text-lg lg:text-xl font-bold text-gray-800 mb-2 md:mb-0">
             Employee Payroll -{" "}
             {new Date(currentYear, currentMonth, 1).toLocaleString("default", {
               month: "long",
@@ -289,34 +283,40 @@ const PayrollPage = () => {
         </div>
 
         {/* Payroll summary */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-4">
-          <div className="bg-gray-50 p-3 rounded-lg border border-gray-200">
-            <div className="text-sm text-gray-600">Total Base Salary</div>
-            <div className="text-xl font-bold text-gray-800">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 mb-4">
+          <div className="bg-gray-50 p-3 rounded-lg border border-gray-200 min-w-0">
+            <div className="text-xs sm:text-sm text-gray-600">
+              Total Base Salary
+            </div>
+            <div className="text-base sm:text-lg md:text-xl font-bold text-gray-800 break-words max-w-full">
               {idrFormatter(payrollTotals.baseSalary)}
             </div>
           </div>
-          <div className="bg-red-50 p-3 rounded-lg border border-red-200">
-            <div className="text-sm text-gray-600">Total Deductions</div>
-            <div className="text-xl font-bold text-red-700">
+          <div className="bg-red-50 p-3 rounded-lg border border-red-200 min-w-0">
+            <div className="text-xs sm:text-sm text-gray-600">
+              Total Deductions
+            </div>
+            <div className="text-base sm:text-lg md:text-xl font-bold text-red-700 break-words max-w-full">
               {idrFormatter(payrollTotals.deductions)}
             </div>
           </div>
-          <div className="bg-green-50 p-3 rounded-lg border border-green-200">
-            <div className="text-sm text-gray-600">Total Bonuses</div>
-            <div className="text-xl font-bold text-green-700">
+          <div className="bg-green-50 p-3 rounded-lg border border-green-200 min-w-0">
+            <div className="text-xs sm:text-sm text-gray-600">
+              Total Bonuses
+            </div>
+            <div className="text-base sm:text-lg md:text-xl font-bold text-green-700 break-words max-w-full">
               {idrFormatter(payrollTotals.bonus)}
             </div>
           </div>
-          <div className="bg-yellow-50 p-3 rounded-lg border border-yellow-200">
-            <div className="text-sm text-gray-600">Total Taxes</div>
-            <div className="text-xl font-bold text-yellow-700">
+          <div className="bg-yellow-50 p-3 rounded-lg border border-yellow-200 min-w-0">
+            <div className="text-xs sm:text-sm text-gray-600">Total Taxes</div>
+            <div className="text-base sm:text-lg md:text-xl font-bold text-yellow-700 break-words max-w-full">
               {idrFormatter(payrollTotals.tax)}
             </div>
           </div>
-          <div className="bg-purple-50 p-3 rounded-lg border border-purple-200">
-            <div className="text-sm text-gray-600">Net Payable</div>
-            <div className="text-xl font-bold text-purple-700">
+          <div className="bg-purple-50 p-3 rounded-lg border border-purple-200 min-w-0">
+            <div className="text-xs sm:text-sm text-gray-600">Net Payable</div>
+            <div className="text-base sm:text-lg md:text-xl font-bold text-purple-700 break-words max-w-full">
               {idrFormatter(payrollTotals.totalAmount)}
             </div>
           </div>

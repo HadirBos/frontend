@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router";
+import { useNavigate } from "react-router";
 import { login } from "../services/authService";
 import { TypeAnimation } from "react-type-animation";
 
@@ -179,14 +179,14 @@ const LoginPage = () => {
                 </div>
               </div>
 
-              <div className="flex items-center justify-between mb-8">
+              {/* <div className="flex items-center justify-between mb-8">
                 <Link
                   to="/forgot-password"
                   className="text-sm text-blue-600 hover:text-blue-800 font-semibold transition-colors duration-300"
                 >
                   Lupa Kata Sandi?
                 </Link>
-              </div>
+              </div> */}
 
               <div className="mb-0">
                 <button

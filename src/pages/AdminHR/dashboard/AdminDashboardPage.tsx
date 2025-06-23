@@ -261,38 +261,42 @@ const AdminDashboardPage = () => {
             </table>
           </div>
 
-          <div className="flex justify-end items-center m-4">
-            <div className="inline-flex items-center gap-2 sm:gap-4">
-              <button
-                onClick={prevPage}
-                disabled={currentPage === 1}
-                className={`px-4 py-2 rounded-lg border text-sm font-medium transition-all duration-300 ${
-                  currentPage === 1
-                    ? "bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed"
-                    : "bg-white hover:bg-gray-100 text-gray-700 border-gray-300"
-                }`}
-              >
-                <ChevronLeft className="h-4 w-4 sm:hidden" />
-                <span className="hidden sm:inline">Previous</span>
-              </button>
+          <div className="flex justify-end items-center">
+            <div className="px-6 py-4 bg-gray-50 border-t border-gray-200 flex items-center justify-between w-full">
+              <div className="text-sm text-gray-700">
+                Showing <span className="font-medium">{startIndex + 1}</span> to{" "}
+                <span className="font-medium">
+                  {Math.min(startIndex + itemsPerPage, filteredUsers.length)}
+                </span>{" "}
+                of <span className="font-medium">{filteredUsers.length}</span>{" "}
+                results
+              </div>
 
-              <span className="text-sm text-gray-600">
-                Page <strong>{currentPage}</strong> of{" "}
-                <strong>{totalPages}</strong>
-              </span>
+              <div className="flex space-x-2">
+                <button
+                  onClick={prevPage}
+                  disabled={currentPage === 1}
+                  className={`px-3 py-1 rounded-md ${
+                    currentPage === 1
+                      ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                      : "bg-white text-gray-700 hover:bg-gray-50 border border-gray-300"
+                  }`}
+                >
+                  <ChevronLeft size={16} />
+                </button>
 
-              <button
-                onClick={nextPage}
-                disabled={paginatedUsers.length < itemsPerPage}
-                className={`px-4 py-2 rounded-lg border text-sm font-medium transition-all duration-300 ${
-                  paginatedUsers.length < itemsPerPage
-                    ? "bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed"
-                    : "bg-white hover:bg-gray-100 text-gray-700 border-gray-300"
-                }`}
-              >
-                <span className="hidden sm:inline">Next</span>
-                <ChevronRight className="h-4 w-4 sm:hidden" />
-              </button>
+                <button
+                  onClick={nextPage}
+                  disabled={currentPage >= totalPages}
+                  className={`px-3 py-1 rounded-md ${
+                    currentPage >= totalPages
+                      ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                      : "bg-white text-gray-700 hover:bg-gray-50 border border-gray-300"
+                  }`}
+                >
+                  <ChevronRight size={16} />
+                </button>
+              </div>
             </div>
           </div>
         </div>

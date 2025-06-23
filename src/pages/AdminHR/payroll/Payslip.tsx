@@ -48,7 +48,12 @@ export default function PaySlip({
     };
 
     fetchAttendance();
-  }, [userInfo.token, payrollRecord.employeeId._id, payrollRecord.month, payrollRecord.year]);
+  }, [
+    userInfo.token,
+    payrollRecord.employeeId._id,
+    payrollRecord.month,
+    payrollRecord.year,
+  ]);
 
   // Format currency
   const idrFormatter = (value: number) => {
@@ -135,7 +140,7 @@ export default function PaySlip({
                 >
                   <ArrowLeft className="h-5 w-5 text-white" />
                 </button>
-                <h2 className="text-lg font-bold text-white">
+                <h2 className="text-base md:text-lg font-bold text-white">
                   Employee Payslip
                 </h2>
               </div>
@@ -147,7 +152,9 @@ export default function PaySlip({
                   className="flex items-center gap-1 px-3 py-2 bg-white text-indigo-700 rounded-md hover:bg-indigo-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Download className="h-4 w-4" />
-                  <span>{isGenerating ? "Generating..." : "Download PDF"}</span>
+                  <span className="hidden sm:inline">
+                    {isGenerating ? "Generating..." : "Download PDF"}
+                  </span>
                 </button>
 
                 {/* <button
@@ -182,10 +189,10 @@ export default function PaySlip({
               {/* Actual payslip that will be converted to PDF */}
               <div
                 ref={payslipRef}
-                className="bg-white rounded-lg shadow-md p-6 md:p-8 max-w-3xl mx-auto"
+                className="bg-white rounded-lg shadow-md p-6 md:p-8 w-[800px] mx-auto"
               >
                 {/* Payslip header */}
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-gray-200 pb-6">
+                <div className="flex flex-row justify-between items-start md:items-center border-b border-gray-200 pb-6">
                   <div className="mb-4 md:mb-0">
                     <div className="bg-gray-100 h-12 w-36 flex items-center justify-center text-gray-400 font-bold rounded">
                       <img src="/p.png" alt="Logo" className="h-8 w-8 mr-2" />
@@ -209,7 +216,7 @@ export default function PaySlip({
                 </div>
 
                 {/* Company and Employee Info */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                <div className="grid grid-cols-2 gap-6 mt-6">
                   <div>
                     <h2 className="text-lg font-semibold text-gray-800 mb-2">
                       Company Information
@@ -248,7 +255,7 @@ export default function PaySlip({
                   <h2 className="text-lg font-semibold text-gray-800 mb-2">
                     Payment Information
                   </h2>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-3 gap-4">
                     <div>
                       <p className="text-sm text-gray-500">Payment Date</p>
                       <p className="font-medium">
@@ -349,7 +356,7 @@ export default function PaySlip({
                   <h2 className="text-lg font-semibold text-gray-800 mb-4">
                     Attendance Summary
                   </h2>
-                  <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+                  <div className="grid grid-cols-5 gap-3">
                     <div className="bg-gray-50 p-3 rounded-lg border border-gray-200">
                       <p className="text-xs text-gray-500">Working Days</p>
                       <p className="text-lg font-medium">

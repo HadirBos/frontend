@@ -39,7 +39,7 @@ interface ReportPdfModalProps {
           pending: number;
           approved: number;
           rejected: number;
-        } []
+        }[]
       | undefined;
     resignationData:
       | {
@@ -48,7 +48,7 @@ interface ReportPdfModalProps {
           pending: number;
           approved: number;
           rejected: number;
-        } []
+        }[]
       | undefined;
     payrollDetailData:
       | {
@@ -197,7 +197,7 @@ export default function ReportPdfModal({
           <h2 className="text-xl font-bold text-gray-800 mb-4">
             Executive Summary
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-3 gap-4">
             {/* Employee Overview Card */}
             <div className="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
               <h3 className="font-medium text-indigo-800 mb-3">
@@ -642,7 +642,7 @@ export default function ReportPdfModal({
           <h2 className="text-xl font-bold text-gray-800 mb-4">
             Department Attendance Breakdown
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-2 gap-6">
             {departmentStats?.stats.map((dept, index) => (
               <div
                 key={index}
@@ -699,7 +699,7 @@ export default function ReportPdfModal({
           <h2 className="text-xl font-bold text-gray-800 mb-4">
             Leave Management Summary
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-4 gap-4">
             <div className="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
               <h3 className="font-medium text-indigo-800 mb-3">
                 Total Requests
@@ -845,7 +845,7 @@ export default function ReportPdfModal({
           <h2 className="text-xl font-bold text-gray-800 mb-4">
             Resignation Tracker
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-4 gap-4">
             <div className="bg-rose-50 border border-rose-200 rounded-lg p-4">
               <h3 className="font-medium text-rose-800 mb-3">
                 Total Resignations
@@ -1049,7 +1049,7 @@ export default function ReportPdfModal({
           <h2 className="text-xl font-bold text-gray-800 mb-4">
             Salary Information
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-3 gap-4">
             {/* Salary Overview Card */}
             <div className="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
               <h3 className="font-medium text-indigo-800 mb-3">
@@ -1170,7 +1170,7 @@ export default function ReportPdfModal({
           <h2 className="text-xl font-bold text-gray-800 mb-4">
             Financial Summary
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-4">
             {/* Budget Impact */}
             <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
               <h3 className="font-medium text-purple-800 mb-3">
@@ -1283,17 +1283,19 @@ export default function ReportPdfModal({
             >
               <ArrowLeft className="h-5 w-5 text-white" />
             </button>
-            <h2 className="text-lg font-bold">{reportTitle}</h2>
+            <h2 className="text-base md:text-lg font-bold">{reportTitle}</h2>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-4">
             <button
               onClick={generatePDF}
               disabled={isGenerating}
               className="flex items-center gap-1 px-3 py-2 bg-white text-indigo-700 rounded-md hover:bg-indigo-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Download className="h-4 w-4" />
-              <span>{isGenerating ? "Generating..." : "Download PDF"}</span>
+              <span className="hidden sm:inline">
+                {isGenerating ? "Generating..." : "Download PDF"}
+              </span>
             </button>
           </div>
         </div>
@@ -1319,10 +1321,10 @@ export default function ReportPdfModal({
           {/* Actual report that will be converted to PDF */}
           <div
             ref={reportRef}
-            className="bg-white rounded-lg shadow-md p-6 md:p-8 max-w-5xl mx-auto"
+            className="bg-white rounded-lg shadow-md p-6 md:p-8 w-[800px] mx-auto"
           >
             {/* Report header */}
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-gray-200 pb-6">
+            <div className="flex flex-row justify-between items-start md:items-center border-b border-gray-200 pb-6">
               <div className="mb-4 md:mb-0">
                 <div className="bg-gray-100 h-12 w-36 flex items-center justify-center text-gray-400 font-bold rounded">
                   <img src="/p.png" alt="Logo" className="h-8 w-8 mr-2" />

@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { ArrowRight, UserCheck, ChartLine, Calendar, UserIcon } from "lucide-react";
+import {
+  ArrowRight,
+  UserCheck,
+  ChartLine,
+  Calendar,
+  UserIcon,
+} from "lucide-react";
 import { motion } from "framer-motion";
 
 import { useNavigate } from "react-router";
@@ -32,7 +38,6 @@ const FeatureButton = ({ icon, title }: FeatureProps) => (
   </motion.div>
 );
 
-
 const StatCard = ({ number, label }: StatCardProps) => {
   const [count, setCount] = useState(0);
 
@@ -63,38 +68,46 @@ const StatCard = ({ number, label }: StatCardProps) => {
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
   return (
-    <div className="w-full h-screen flex flex-col overflow-x-hidden relative">
+    <div className="w-full min-h-screen flex flex-col overflow-x-hidden relative">
       {/* Background gradient with subtle pattern */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-indigo-900"></div>
-      <div className="absolute inset-0 opacity-10 bg-pattern"></div>
-      
+      <div className="fixed inset-0 w-full h-full bg-gradient-to-br from-blue-600 to-indigo-900 pointer-events-none z-0"></div>
+      <div className="fixed inset-0 w-full h-full opacity-10 bg-pattern pointer-events-none z-0"></div>
+
       {/* Content container */}
-      <div className="relative w-full h-full flex flex-col md:flex-row px-6 md:px-12 lg:px-20">
-        
+      <div className="relative w-full min-h-screen flex flex-col md:flex-row px-6 md:px-12 lg:px-20 z-10">
         {/* Left section - Content */}
-        <div className="md:w-7/12 h-full flex flex-col justify-center py-10">
+        <div className="md:w-7/12 flex flex-col justify-center py-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-white leading-tight">
-              Revolutionizing <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-200 to-purple-200">HR Management</span>
+              Revolutionizing{" "}
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-200 to-purple-200">
+                HR Management
+              </span>
             </h1>
-            
+
             <p className="text-blue-100 text-lg mb-8 max-w-lg">
-              Streamline your HR operations with our comprehensive suite of tools designed for modern workplaces.
+              Streamline your HR operations with our comprehensive suite of
+              tools designed for modern workplaces.
             </p>
-            
+
             {/* Feature buttons */}
             <div className="grid grid-cols-2 gap-3 mb-8">
-              <FeatureButton icon={<UserCheck size={18} />} title="Attendance" />
+              <FeatureButton
+                icon={<UserCheck size={18} />}
+                title="Attendance"
+              />
               <FeatureButton icon={<ChartLine size={18} />} title="Analytics" />
-              <FeatureButton icon={<Calendar size={18} />} title="Leave Mgmt." />
+              <FeatureButton
+                icon={<Calendar size={18} />}
+                title="Leave Mgmt."
+              />
               <FeatureButton icon={<UserIcon size={18} />} title="Teams" />
             </div>
-            
+
             {/* CTA Button */}
             <motion.button
               className="px-8 py-3 bg-white text-blue-700 rounded-full font-bold shadow-lg hover:shadow-xl transition-all flex items-center justify-center mb-10"
@@ -104,7 +117,7 @@ const HomePage: React.FC = () => {
             >
               Get Started <ArrowRight className="ml-2" size={18} />
             </motion.button>
-            
+
             {/* Stats */}
             <div className="flex justify-between max-w-md">
               <StatCard number="10" label="Years of Experience" />
@@ -113,9 +126,9 @@ const HomePage: React.FC = () => {
             </div>
           </motion.div>
         </div>
-        
+
         {/* Right section - Visual */}
-        <div className="md:w-5/12 flex items-center justify-center h-full relative">
+        <div className="md:w-5/12 flex items-center justify-center relative py-10 md:py-0">
           <motion.div
             className="relative w-full h-full flex items-center justify-center"
             initial={{ opacity: 0 }}
@@ -125,9 +138,9 @@ const HomePage: React.FC = () => {
             {/* Decorative elements */}
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 md:w-80 md:h-80 bg-blue-400 rounded-full opacity-20 filter blur-3xl"></div>
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 md:w-96 md:h-96 bg-indigo-500 rounded-full opacity-20 filter blur-3xl"></div>
-            
+
             {/* Main visual element */}
-            <motion.div 
+            <motion.div
               className="bg-white/10 backdrop-filter backdrop-blur-md p-8 rounded-2xl border border-white/20 shadow-2xl w-11/12 max-w-md relative z-10"
               initial={{ y: 20 }}
               animate={{ y: 0 }}
@@ -135,7 +148,7 @@ const HomePage: React.FC = () => {
                 duration: 2,
                 repeat: Infinity,
                 repeatType: "reverse",
-                ease: "easeInOut"
+                ease: "easeInOut",
               }}
             >
               <div className="flex items-center justify-between mb-8">
@@ -146,11 +159,13 @@ const HomePage: React.FC = () => {
                 </div>
                 <div className="text-white/70 text-sm">HadirBOS Dashboard</div>
               </div>
-              
+
               <div className="space-y-4">
                 {/* Dashboard elements */}
                 <div className="bg-white/10 rounded-lg p-3">
-                  <div className="text-white/80 text-xs mb-2">Today's Attendance</div>
+                  <div className="text-white/80 text-xs mb-2">
+                    Today's Attendance
+                  </div>
                   <div className="flex justify-between items-center">
                     <div className="text-white font-bold text-2xl">87%</div>
                     <div className="flex space-x-1">
@@ -162,32 +177,46 @@ const HomePage: React.FC = () => {
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="grid grid-cols-2 gap-3">
                   <div className="bg-white/10 rounded-lg p-3">
                     <div className="text-white/80 text-xs">On Leave</div>
                     <div className="text-white font-bold">12</div>
                   </div>
                   <div className="bg-white/10 rounded-lg p-3">
-                    <div className="text-white/80 text-xs">Pending Requests</div>
+                    <div className="text-white/80 text-xs">
+                      Pending Requests
+                    </div>
                     <div className="text-white font-bold">8</div>
                   </div>
                 </div>
-                
+
                 <div className="bg-white/10 rounded-lg p-3">
-                  <div className="text-white/80 text-xs mb-2">Team Performance</div>
+                  <div className="text-white/80 text-xs mb-2">
+                    Team Performance
+                  </div>
                   <div className="flex items-center space-x-2">
-                    <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 text-xs font-bold">DC</div>
-                    <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 text-xs font-bold">JL</div>
-                    <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-xs font-bold">KM</div>
-                    <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xs font-bold">AR</div>
-                    <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-white text-xs">+8</div>
+                    <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 text-xs font-bold">
+                      DC
+                    </div>
+                    <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 text-xs font-bold">
+                      JL
+                    </div>
+                    <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-xs font-bold">
+                      KM
+                    </div>
+                    <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xs font-bold">
+                      AR
+                    </div>
+                    <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-white text-xs">
+                      +8
+                    </div>
                   </div>
                 </div>
               </div>
-              
+
               {/* Floating notification */}
-              <motion.div 
+              <motion.div
                 className="absolute -top-4 -right-4 bg-white p-2 rounded-lg shadow-lg flex items-center space-x-2"
                 animate={{
                   y: [0, -5, 0],
@@ -210,7 +239,7 @@ const HomePage: React.FC = () => {
           </motion.div>
         </div>
       </div>
-      
+
       {/* Add CSS for background pattern */}
       <style>{`
         .bg-pattern {
