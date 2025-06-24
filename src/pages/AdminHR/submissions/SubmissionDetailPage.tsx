@@ -94,21 +94,45 @@ const SubmissionDetailPage = () => {
   //   }
   // }
 
-  const downloadFile = (fileUrl: string) => {
+  // const downloadFile = (fileUrl: string) => {
+  //   if (!fileUrl) return;
+
+  //   // Tambahkan ?fl_attachment agar Cloudinary memaksa download
+  //   const downloadUrl = fileUrl.includes("?")
+  //     ? ${fileUrl}&fl_attachment
+  //     : ${fileUrl}?fl_attachment;
+
+  //   // Buat elemen <a> secara dinamis dan trigger klik
+  //   const link = document.createElement("a");
+  //   link.href = downloadUrl;
+  //   link.download = fileUrl.split("/").pop() || "document";
+  //   document.body.appendChild(link);
+  //   link.click();
+  //   document.body.removeChild(link);
+  // };
+  
+  const downloadFile = async (fileUrl: string) => {
     if (!fileUrl) return;
 
-    const downloadUrl = fileUrl.includes("?")
-      ? `${fileUrl}&fl_attachment`
-      : `${fileUrl}?fl_attachment`;
+    try {
+      const response = await fetch(fileUrl);
+      const blob = await response.blob();
 
-    const link = document.createElement("a");
-    link.href = downloadUrl;
-    link.download = fileUrl.split("/").pop() || "document";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+      const blobUrl = window.URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+      link.href = blobUrl;
+      link.download = fileUrl.split("/").pop() || "document";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      window.URL.revokeObjectURL(blobUrl);
+    } catch (error) {
+      console.error("Failed to download file:", error);
+      alert("Failed to download file. Please try again.");
+    }
   };
-  
 
   const handleStatusUpdate = async (status: "approved" | "rejected") => {
     try {
