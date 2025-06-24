@@ -1,5 +1,3 @@
-"use client"
-
 import { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router"
 import {
@@ -17,11 +15,11 @@ import {
 } from "lucide-react"
 import { getCurrentUser } from "../../../services/authService"
 import { getSubmissionById, updateSubmissionStatus } from "../../../services/submissionService"
-import { getFileUrl } from "../../../services/fileUploadService"
+// import { getFileUrl } from "../../../services/fileUploadService"
 import type { Submission } from "../../../types/submission"
 import Loading from "../../../components/Loading"
 import Avatar from "../../../components/Avatar"
-import axios from "axios"
+// import axios from "axios"
 
 const SubmissionDetailPage = () => {
   const { id } = useParams()
@@ -66,35 +64,57 @@ const SubmissionDetailPage = () => {
     })
   }
 
-  const downloadFile = async (fileUrl: string) => {
-    try {
-      const fullUrl = getFileUrl(fileUrl)
-      const response = await axios.get(fullUrl, {
-        headers: {
-          Authorization: `Bearer ${userInfo.token}`,
-        },
-        responseType: "blob",
-      })
+  // const downloadFile = async (fileUrl: string) => {
+  //   try {
+  //     const fullUrl = getFileUrl(fileUrl)
+  //     const response = await axios.get(fullUrl, {
+  //       headers: {
+  //         Authorization: `Bearer ${userInfo.token}`,
+  //       },
+  //       responseType: "blob",
+  //     })
 
-      // Create a blob URL for the file
-      const blob = new Blob([response.data])
-      const url = window.URL.createObjectURL(blob)
+  //     // Create a blob URL for the file
+  //     const blob = new Blob([response.data])
+  //     const url = window.URL.createObjectURL(blob)
 
-      // Create a temporary link and trigger download
-      const a = document.createElement("a")
-      a.href = url
-      a.download = fileUrl.split("/").pop() || "document"
-      document.body.appendChild(a)
-      a.click()
+  //     // Create a temporary link and trigger download
+  //     const a = document.createElement("a")
+  //     a.href = url
+  //     a.download = fileUrl.split("/").pop() || "document"
+  //     document.body.appendChild(a)
+  //     a.click()
 
-      // Clean up
-      window.URL.revokeObjectURL(url)
-      document.body.removeChild(a)
-    } catch (error) {
-      console.error("Error downloading file:", error)
-      alert("Failed to download file. Please try again.")
-    }
-  }
+  //     // Clean up
+  //     window.URL.revokeObjectURL(url)
+  //     document.body.removeChild(a)
+  //   } catch (error) {
+  //     console.error("Error downloading file:", error)
+  //     alert("Failed to download file. Please try again.")
+  //   }
+  // }
+
+  const getCloudinaryUrl = (filePath: string) => {
+    if (!filePath) return "";
+    const cloudName = "doloarbi0";
+    return `https://res.cloudinary.com/${cloudName}/upload/hadirbos/${filePath}`;
+  };
+
+  const downloadFile = (filePath: string) => {
+    if (!filePath) return;
+    const url = getCloudinaryUrl(filePath);
+    const downloadUrl = url.includes("?")
+      ? `${url}&fl_attachment`
+      : `${url}?fl_attachment`;
+
+    const link = document.createElement("a");
+    link.href = downloadUrl;
+    link.download = filePath.split("/").pop() || "document";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+  
 
   const handleStatusUpdate = async (status: "approved" | "rejected") => {
     try {
