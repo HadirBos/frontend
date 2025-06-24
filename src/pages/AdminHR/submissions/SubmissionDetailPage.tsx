@@ -94,22 +94,16 @@ const SubmissionDetailPage = () => {
   //   }
   // }
 
-  const getCloudinaryUrl = (filePath: string) => {
-    if (!filePath) return "";
-    const cloudName = "doloarbi0";
-    return `https://res.cloudinary.com/${cloudName}/upload/hadirbos/${filePath}`;
-  };
+  const downloadFile = (fileUrl: string) => {
+    if (!fileUrl) return;
 
-  const downloadFile = (filePath: string) => {
-    if (!filePath) return;
-    const url = getCloudinaryUrl(filePath);
-    const downloadUrl = url.includes("?")
-      ? `${url}&fl_attachment`
-      : `${url}?fl_attachment`;
+    const downloadUrl = fileUrl.includes("?")
+      ? `${fileUrl}&fl_attachment`
+      : `${fileUrl}?fl_attachment`;
 
     const link = document.createElement("a");
     link.href = downloadUrl;
-    link.download = filePath.split("/").pop() || "document";
+    link.download = fileUrl.split("/").pop() || "document";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
