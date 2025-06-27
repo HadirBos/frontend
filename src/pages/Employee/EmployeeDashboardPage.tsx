@@ -83,10 +83,10 @@ const EmployeeDashboardPage = () => {
     }
     // After 10 AM, show "late", "sick", "leave"
     else {
-      setAvailableStatusOptions(["present", "sick", "leave"])
+      setAvailableStatusOptions(["late", "sick", "leave"])
       // If current selected status is "present", change it to "late"
       if (attendanceStatus === "present") {
-        setAttendanceStatus("present")
+        setAttendanceStatus("late")
       }
     }
   }
