@@ -74,7 +74,7 @@ const EmployeeDashboardPage = () => {
     const hours = now.getHours()
 
     // If time is between 8 AM and 10 AM (inclusive), show "present", "sick", "leave"
-    /*if (hours >= 8 && hours < 10) {
+    if (hours >= 8 && hours < 10) {
       setAvailableStatusOptions(["present", "sick", "leave"])
       // If current selected status is "late", change it to "present"
       if (attendanceStatus === "late") {
@@ -83,12 +83,12 @@ const EmployeeDashboardPage = () => {
     }
     // After 10 AM, show "late", "sick", "leave"
     else {
-      setAvailableStatusOptions(["late", "sick", "leave"])
+      setAvailableStatusOptions(["present", "sick", "leave"])
       // If current selected status is "present", change it to "late"
       if (attendanceStatus === "present") {
-        setAttendanceStatus("late")
+        setAttendanceStatus("present")
       }
-    }*/
+    }
   }
 
   useEffect(() => {
