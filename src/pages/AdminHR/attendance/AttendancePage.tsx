@@ -498,7 +498,7 @@ export default function AttendancePage() {
                       const selectedDate = new Date(
                         currentYear,
                         currentMonth,
-                        day + 1
+                        day
                       );
                       const isoDate = selectedDate.toISOString().split("T")[0]; // format ISO date
                       openAddAttendance(isoDate);
